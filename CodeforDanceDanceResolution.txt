@@ -1,0 +1,506 @@
+void setup(){
+ size(800,800);
+ background(128);
+}
+
+void draw(){
+ frameRate(60);
+ 
+fill(128);
+
+ //re draws the background
+ rect(0,0,800,800);
+ 
+ //draw outer lines of game
+ strokeWeight(3);
+ line(200,0,200,800);
+ line(600,0,600,800);
+ 
+ //draw the inner lines
+ strokeWeight(1);
+ line(300,0,300,800);
+ line(400,0,400,800);
+ 
+ line(500,0,500,800);
+ 
+ //draw the boxes at the bottom
+ strokeWeight(3);
+ fill(255,0,100);
+ rect(200,750,100,55);
+ fill(100,0,255);
+ rect(300,750,100,55);
+ fill(100,0,255);
+ rect(400,750,100,55);
+ fill(255,0,100);
+ rect(500,750,100,55);
+ 
+  //move red block 1 down
+  if(R1==true){
+  if(r1y<750){
+ rect(200,r1y,100,55);
+ r1y+=BPMScale;
+ }
+  }
+  
+   //move red block 2 down
+  if(R2==true){
+  if(r2y<750){
+ rect(500,r2y,100,55);
+ r2y+=BPMScale;
+ }
+  }
+  
+   //move blue block 1 down
+  if(B1==true){
+  if(b1y<750){
+ fill(100,0,255);
+ rect(300,b1y,100,55);
+ b1y+=BPMScale;
+ }
+  }
+  
+  //move blue Bock 2 down
+  if(B2==true){
+  if(b2y<750){
+ fill(100,0,255);
+ rect(400,b2y,100,55);
+ b2y+=BPMScale;
+ }
+  }
+  
+  //move ALTred block 1 down
+  if(RR1==true){
+  if(rr1y<750){
+ rect(200,rr1y,100,55);
+ rr1y+=BPMScale;
+ }
+  }
+  
+   //move ALTred block 2 down
+  if(RR2==true){
+  if(rr2y<750){
+ rect(500,rr2y,100,55);
+ rr2y+=BPMScale;
+ }
+  }
+  
+   //move ALTblue block 1 down
+  if(BB1==true){
+  if(bb1y<750){
+ fill(100,0,255);
+ rect(300,bb1y,100,55);
+ bb1y+=BPMScale;
+ }
+  }
+  
+  //move ALTblue Bock 2 down
+  if(BB2==true){
+  if(bb2y<750){
+ fill(100,0,255);
+ rect(400,bb2y,100,55);
+ bb2y+=BPMScale;
+ }
+  }
+  
+  //Move hold red block 1
+  if(RH1==true){
+    if((rh1y-rhLength)<750){
+      fill(255,0,100);
+      rect(200,rh1y-rhLength,100,rhLength);
+       rh1y+=BPMScale;
+    }
+   
+  }
+  
+  //if the red hold block reaches the bottom remove it
+  if(rh1y-rhLength>740){
+    RH1=false;
+    rh1y=0;
+  }
+  
+  //if the red block reaches the bottom remove it
+  if(r1y>740){
+    R1=false;
+    r1y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the ALTred block reaches the bottom remove it
+  if(rr1y>740){
+    RR1=false;
+    rr1y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the red block2 reaches the bottom remove it
+  if(r2y>740){
+    R2=false;
+    r2y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the ALTred block2 reaches the bottom remove it
+  if(rr2y>740){
+    RR2=false;
+    rr2y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the blue block reaches the bottom remove it
+  if(b1y>740){
+    B1=false;
+    b1y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the ALTblue block reaches the bottom remove it
+  if(bb1y>740){
+    BB1=false;
+    bb1y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the blue block2 reaches the bottom remove it
+  if(b2y>740){
+    B2=false;
+    b2y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //if the ALTblue block2 reaches the bottom remove it
+  if(bb2y>740){
+    BB2=false;
+    bb2y=0;
+    fill(255,0,0,30);
+    rect(0,0,800,800);
+  }
+  
+  //show the score for red block1
+  if(ScoreR1==true && Count<30){
+      text(300,200,700);
+      Count+=1;
+  }
+  if(Count>29){
+    Count=0;
+    ScoreR1=false;
+  }
+ 
+ //start the game with the 's' key
+ if(key=='s'){
+   GameStart=true;
+   key='o';
+ }
+//dealing with Score
+
+//Great hit Red1
+if(key=='z' && r1y>720){
+  println("hit");
+  Score+=300;
+  R1=false;
+  r1y=0;
+  showScore(1,1);
+}
+
+//Great hit Red2
+if(key=='/' && r2y>720){
+  println("hit");
+  Score+=300;
+  R2=false;
+  r2y=0;
+  showScore(2,1);
+}
+
+//Great hit Blue1
+if(key=='x' && b1y>720){
+  println("hit");
+  Score+=300;
+  B1=false;
+  b1y=0;
+  showScore(3,1);
+}
+
+//Great hit Blue2
+if(key=='.' && b2y>720){
+  println("hit");
+  Score+=300;
+  B2=false;
+  b2y=0;
+  showScore(4,1);
+}
+
+//Good hit Red1
+if(key=='z' && r1y>690 && r1y<720){
+  println("hit");
+  Score+=200;
+  R1=false;
+  r1y=0;
+  showScore(1,2);
+}
+
+//Good hit Red2
+if(key=='/' && r2y>690 && r2y<720){
+  println("hit");
+  Score+=200;
+  R2=false;
+  r2y=0;
+  showScore(2,2);
+}
+
+//Good hit Blue1
+if(key=='x' && b1y>690 && b1y<720){
+  println("hit");
+  Score+=200;
+  B1=false;
+  b1y=0;
+  showScore(3,2);
+}
+
+//Good hit Blue2
+if(key=='.' && b2y<720 && b2y>690){
+  println("hit");
+  Score+=200;
+  B2=false;
+  b2y=0;
+  showScore(4,2);
+}
+
+//reduce the BPM by 1
+if(key=='-'){
+  BPMScale-=1;
+  key='o';
+}
+
+//increase the BPM by 1
+if(key=='='){
+  BPMScale+=1;
+  key='o';
+}
+
+//show the score and BPM value
+textSize(35);
+fill(0);
+text("Score:",50,150);
+text(Score,75,200);
+text("BPM:",50,250);
+text(BPMScale,75,300);
+
+//Beat Map
+if(GameStart==true){
+gameTime+=1;
+println(gameTime);
+}
+
+//makes all the blocks fall down
+if(gameTime==30){
+  //MakeRedHold1(600);
+  MakeBlockRed1();
+}
+if(gameTime==60){
+  MakeBlockBlue2();
+}
+if(gameTime==90){
+  MakeBlockBlue1();
+}
+if(gameTime==90){
+  MakeBlockRed1();
+}
+if(gameTime==120){
+  MakeBlockBlue2();
+}
+
+if(gameTime==150){
+  MakeBlockBlue2();
+}
+if(gameTime==180){
+  MakeBlockBlue2();
+}
+if(gameTime==210){
+  MakeBlockBlue1();
+}
+if(gameTime==210){
+  MakeBlockRed1();
+}
+if(gameTime==240){
+  MakeBlockBlue2();
+}
+if(gameTime==240){
+  MakeBlockRed2();
+}
+
+if(gameTime==270){
+  MakeBlockBlue1();
+}
+if(gameTime==300){
+  MakeBlockBlue2();
+}
+if(gameTime==330){
+  MakeBlockRed2();
+}
+if(gameTime==330){
+  MakeBlockRed1();
+}
+if(gameTime==360){
+  MakeBlockRed1();
+}
+if(gameTime==390){
+  MakeBlockRed2();
+}
+
+if(gameTime==420){
+  MakeBlockBlue2();
+}
+if(gameTime==450){
+  MakeBlockBlue2();
+}
+if(gameTime==480){
+  MakeBlockBlue1();
+}
+if(gameTime==510){
+  MakeBlockRed1();
+}
+if(gameTime==510){
+  MakeBlockRed2();
+}
+
+if(gameTime==540){
+ MakeBlockBlue2();
+}
+
+if(gameTime==570){
+ MakeBlockRed2();
+}
+if(gameTime==600){
+ MakeBlockRed2();
+}
+if(gameTime==630){
+ MakeBlockBlue2();
+}
+if(gameTime==660){
+ MakeBlockRed1();
+}
+if(gameTime==690){
+ MakeBlockBlue2();
+}
+if(gameTime==720){
+ MakeBlockRed1();
+}
+if(gameTime==750){
+ MakeBlockRed2();
+}
+if(gameTime==780){
+ MakeBlockBlue1();
+}
+if(gameTime==780){
+ MakeBlockRed2();
+}
+if(gameTime==810){
+ MakeRedHold1(1600);
+}
+if(gameTime==1000){
+
+}
+
+}
+
+
+int BPMScale=15;int 
+
+//the y values of all the blocks1
+r1y=0;int r2y=0;int b1y=0;int b2y=0;
+
+//the y value of hold blocks
+int rh1y=0;
+int rhLength;
+
+//the y vlaues of the ALTblocks
+int rr1y=0;int rr2y=0;int bb1y=0;int bb2y=0;
+
+//GUI elements varables
+int Count=0;int gameTime=0;int Score=0;
+
+//is the block on screan?
+boolean R1=false;boolean R2=false;boolean B1=false;boolean B2=false;boolean RH1=false;
+
+//if the block in on screan is the ALTblock on screen?
+boolean RR1=false;boolean RR2=false;boolean BB1=false;boolean BB2=false;boolean GameStart=false;boolean ScoreR1=false;boolean ScoreR2=false;boolean ScoreB1=false;boolean ScoreB2=false;boolean ScoreRR1=false;boolean ScoreRR2=false;boolean ScoreBB1=false;boolean ScoreBB2=false;
+
+//draws a red block
+void MakeBlockRed1(){
+   if(r1y==0){
+  R1=true;
+  }
+  if(r1y>0){
+  RR1=true;
+  }
+}
+
+//draws a red block2
+void MakeBlockRed2(){
+    if(r2y==0){
+  R2=true;
+  }
+  if(r2y>0){
+  RR2=true;
+  }
+}
+
+//draws blue block2
+void MakeBlockBlue2(){
+    if(b2y==0){
+  B2=true;
+  }
+  if(b2y>0){
+  BB2=true;
+  }
+}
+
+//draws the blue block
+void MakeBlockBlue1(){
+     if(b1y==0){
+  B1=true;
+  }
+  if(b1y>0){
+  BB1=true;
+  }
+}
+
+//draws the hold block
+void MakeRedHold1(int Length){
+  rhLength=Length;
+  RH1=true;
+}
+
+//displays the score depending on the color of the block hit and accuracy
+void showScore(int a,int b){
+  if(a==1 && b==1){
+  ScoreR1=true;
+  }
+   if(a==2 && b==1){
+  ScoreB1=true;
+  }
+   if(a==3 && b==1){
+  ScoreB2=true;
+  }
+    if(a==4 && b==1){
+  ScoreR2=true;
+  }
+   if(a==1 && b==2){
+  ScoreRR1=true;
+  }
+   if(a==2 && b==2){
+  ScoreBB1=true;
+  }
+   if(a==3 && b==2){
+  ScoreBB2=true;
+  }
+    if(a==4 && b==2){
+  ScoreRR2=true;
+  }
+}
